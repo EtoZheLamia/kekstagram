@@ -11,6 +11,8 @@ function checkStringLength (string, length) {
   return string.length <= length;
 }
 
+checkStringLength();
+
 const NAME_AUTHOR = ['Алексей', 'Родион', 'Алиса', 'Леонид', 'Даниил', 'Илья', 'Павел', 'Анна', 'Аделина', 'Диана'];
 const COMMENT_MESSAGE = [
   'Всё отлично!',
