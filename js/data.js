@@ -34,8 +34,7 @@ const createPicture = (index) => ({
   'comments': Array.from({length: getRandomPositiveInteger(0, 10)}, (_, indexComment) => createComment(indexComment + 1))
 });
 
-const NUMBER_OF_PICTURE = 25;
-const createPictures = () => Array.from({length: NUMBER_OF_PICTURE}, (_, indexPicture)=> createPicture(indexPicture + 1));
+const createPictures = (count) => Array.from({length: count}, (_, indexPicture)=> createPicture(indexPicture + 1));
 
 checkStringLength('',140);
 export {createPictures};
