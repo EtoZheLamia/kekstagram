@@ -21,7 +21,7 @@ const DESCRIPTION_PHOTO = [
 
 const createComment = (index) => ({
   'id': index,
-  'avatar': `img/avatar-${getRandomPositiveInteger(0,6)}.svg`,
+  'avatar': `img/avatar-${getRandomPositiveInteger(1,6)}.svg`,
   'message': `${getRandomArrayElement(COMMENT_MESSAGE)}`,
   'name': `${getRandomArrayElement(NAME_AUTHOR)}`
 });
