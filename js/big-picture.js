@@ -22,4 +22,4 @@ function hideBigPicture()  {
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
-export {showBigPicture, hideBigPicture};
+export {showBigPicture, hideBigPicture, onPopupEscKeydown};
