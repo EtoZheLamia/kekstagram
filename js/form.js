@@ -55,6 +55,8 @@ FORM.addEventListener('submit', (evt) => {
   pristine.validate();
 });
 
+// Валидация хэштега
+
 const MAX_HASHTAG_COUNT = 5;
 const re = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
 
