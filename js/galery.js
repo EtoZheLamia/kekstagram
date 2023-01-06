@@ -1,36 +1,39 @@
 import {showBigPicture, hideBigPicture} from './big-picture.js';
 import {PICTURES} from './picture.js';
 
-const THUMBNAILS = document.querySelectorAll('.picture');
-const PICTURES_CONTAINER = document.querySelector('.big-picture');
-const COMMENTS_COUNT = PICTURES_CONTAINER.querySelector('.social__comment-count');
-const COMMENTS_LIST = PICTURES_CONTAINER.querySelector('.social__comments');
-const COMMENTS_LOADER = PICTURES_CONTAINER.querySelector('.social__comments-loader');
+const PICTURE_CONTAINER = document.querySelector('.big-picture');
+const COMMENTS_COUNT = PICTURE_CONTAINER.querySelector('.social__comment-count');
+const COMMENTS_LIST = PICTURE_CONTAINER.querySelector('.social__comments');
+const COMMENTS_LOADER = PICTURE_CONTAINER.querySelector('.social__comments-loader');
 const CLOSE_PICTURE = document.querySelector('.big-picture__cancel');
+const PICTURES_CONTAINER = document.querySelector('.pictures');
 
 let comments = [];
 
 const COMMENTS_PER_PORTION = 5;
 let showComments = 0;
 
-
-const addThumbnailClickHandler = (thumbnail,picture) =>{
-  thumbnail.addEventListener('click', () => {
+function renderBigPicture(evt) {
+  const currentPicture = evt.target.closest('.picture');
+  if (currentPicture) {
+    const currentImg = currentPicture.querySelector('.picture__img');
+    const picturelikes = currentPicture.querySelector('.picture__likes');
+    const pictureId = currentPicture.getAttribute('id') - 1;
     COMMENTS_LIST.innerHTML ='';
     showComments = 0;
     showBigPicture();
-    PICTURES_CONTAINER.querySelector('.big-picture__img img').src = picture.url;
-    PICTURES_CONTAINER.querySelector('.likes-count').textContent = picture.likes;
-    PICTURES_CONTAINER.querySelector('.social__caption').textContent = picture.description;
-    comments = picture.comments;
+    PICTURE_CONTAINER.querySelector('.big-picture__img img').src = currentImg.getAttribute('src');
+    PICTURE_CONTAINER.querySelector('.likes-count').textContent = picturelikes.textContent;
+    PICTURE_CONTAINER.querySelector('.social__caption').textContent = PICTURES[pictureId].description;
+    comments = PICTURES[pictureId].comments;
     if(comments.length > 0) {
       renderCommentsList(comments);
     } else {
       COMMENTS_COUNT.innerHTML =  'Здесь пока нет ни одного комментария, вы можете стать первым!';
       COMMENTS_LOADER.classList.add('hidden');
     }
-  });
-};
+  }
+}
 
 function hideButtonHandler(element) {
   if (element.length <= showComments) {
@@ -40,11 +43,6 @@ function hideButtonHandler(element) {
     COMMENTS_COUNT.innerHTML =  `${showComments} из <span class="comments-count">${element.length}</span> комментариев`;
     COMMENTS_LOADER.classList.remove('hidden');
   }
-}
-
-
-for (let i = 0; i < THUMBNAILS.length; i++) {
-  addThumbnailClickHandler(THUMBNAILS[i], PICTURES[i]);
 }
 
 function renderCommentsList(arr){
@@ -67,6 +65,8 @@ function createComment(element) {
     </li>`;
 }
 
+PICTURES_CONTAINER.addEventListener('click', renderBigPicture);
+
 COMMENTS_LOADER.addEventListener('click', () => {
   renderCommentsList(comments);
 });
@@ -74,5 +74,3 @@ COMMENTS_LOADER.addEventListener('click', () => {
 CLOSE_PICTURE.addEventListener('click', () => {
   hideBigPicture();
 });
-
-

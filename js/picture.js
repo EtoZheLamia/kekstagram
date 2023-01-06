@@ -5,7 +5,7 @@ const PICTURES = createPictures(25);
 
 PICTURES.forEach((element) => {
   const USERS_PICTURE = `
-  <a href="#" class="picture">
+  <a href="#" class="picture" id="${element.id}">
     <img class="picture__img" src="${element.url}" width="182" height="182" alt="Случайная фотография">
     <p class="picture__info">
       <span class="picture__comments">${element.comments.length}</span>
