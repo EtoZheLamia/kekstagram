@@ -1,10 +1,15 @@
 import {isEscapeKey} from './util.js';
+import {onSmallerButtonClick, onBiggerButtonClick, onChangeEffects} from './editing-image.js';
 
 const FORM = document.querySelector('.img-upload__form');
 const FILE_FIELD = FORM.querySelector('#upload-file');
 const UPLOAD_CANCEL = FORM.querySelector('#upload-cancel');
 const TEXT_DESCRIPTION = FORM.querySelector('.text__description');
 const TEXT_HASHTAGS = FORM.querySelector('.text__hashtags');
+const SMALLER_SCALE_CONTROL = document.querySelector('.scale__control--smaller');
+const BIGGER_SCALE_CONTROL = document.querySelector('.scale__control--bigger');
+const EFFECTS_LIST = document.querySelector('.effects__list');
+const IMAGE_LEVEL_EFFECT = document.querySelector('.img-upload__effect-level');
 
 // Открытие формы редактирования изображения
 const onPopupEscKeydown = (evt) => {
@@ -24,6 +29,10 @@ function showModal() {
   document.addEventListener('keydown', onPopupEscKeydown);
   TEXT_DESCRIPTION.addEventListener('keydown', onFieldEscKeydown);
   TEXT_HASHTAGS.addEventListener('keydown', onFieldEscKeydown);
+  SMALLER_SCALE_CONTROL.addEventListener('click', onSmallerButtonClick);
+  BIGGER_SCALE_CONTROL.addEventListener('click', onBiggerButtonClick);
+  EFFECTS_LIST.addEventListener('change', onChangeEffects);
+  IMAGE_LEVEL_EFFECT.classList.add('hidden');
 }
 
 FILE_FIELD.addEventListener('change', () => {
@@ -36,6 +45,9 @@ function hideModal() {
   document.removeEventListener('keydown', onPopupEscKeydown);
   TEXT_DESCRIPTION.removeEventListener('keydown', onFieldEscKeydown);
   TEXT_HASHTAGS.removeEventListener('keydown', onFieldEscKeydown);
+  SMALLER_SCALE_CONTROL.removeEventListener('click', onSmallerButtonClick);
+  BIGGER_SCALE_CONTROL.removeEventListener('click', onBiggerButtonClick);
+  EFFECTS_LIST.removeEventListener('change', onChangeEffects);
   FORM.reset();
 }
 

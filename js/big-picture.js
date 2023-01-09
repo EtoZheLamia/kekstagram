@@ -2,7 +2,6 @@ import {isEscapeKey} from './util.js';
 
 const BIG_PICTURE = document.querySelector('.big-picture');
 
-
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
