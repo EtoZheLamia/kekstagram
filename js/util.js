@@ -15,4 +15,9 @@ function checkStringLength (string, length) {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomPositiveInteger, getRandomArrayElement, checkStringLength, isEscapeKey};
+const showAlertLoad = () => {
+  const windowError = document.querySelector('.error__load-data')
+  windowError.classList.remove('hidden');
+}
+
+export {getRandomPositiveInteger, getRandomArrayElement, checkStringLength, isEscapeKey, showAlertLoad};
