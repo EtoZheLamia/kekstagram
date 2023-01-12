@@ -9,7 +9,6 @@ const COMMENTS_LIST = BIG_PICTURE.querySelector('.social__comments');
 
 const COMMENTS_COUNT = BIG_PICTURE.querySelector('.social__comment-count');
 const COMMENTS_LOADER = BIG_PICTURE.querySelector('.social__comments-loader');
-const BIG_PICTURE_PREVIEW = BIG_PICTURE.querySelector('.big-picture__preview');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
