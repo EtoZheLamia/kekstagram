@@ -1,12 +1,5 @@
-import './form.js';
-import {renderPictures} from './preview-pictures.js';
-import {showAlertLoad} from './util.js';
+import {setUserFormSubmit} from './load-picture.js';
+import {getData} from './api.js';
 
-fetch ('https://25.javascript.pages.academy/kekstagram/data')
-  .then((response)=>response.json())
-  .then((photos)=> {
-    renderPictures(photos);
-  })
-  .catch(() =>{
-    showAlertLoad();
-  });
+setUserFormSubmit();
+getData();

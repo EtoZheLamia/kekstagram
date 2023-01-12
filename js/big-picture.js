@@ -9,6 +9,7 @@ const COMMENTS_LIST = BIG_PICTURE.querySelector('.social__comments');
 
 const COMMENTS_COUNT = BIG_PICTURE.querySelector('.social__comment-count');
 const COMMENTS_LOADER = BIG_PICTURE.querySelector('.social__comments-loader');
+const BIG_PICTURE_PREVIEW = BIG_PICTURE.querySelector('.big-picture__preview');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -79,6 +80,12 @@ function showBigPicture(data) {
   }
 }
 
+BIG_PICTURE.addEventListener('click', (evt) => {
+  if (evt.target.matches('.big-picture')) {
+    hideBigPicture();
+  }
+});
+
 function hideBigPicture()  {
   BIG_PICTURE.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -88,7 +95,6 @@ function hideBigPicture()  {
 
 PICTURE_CLOSE.addEventListener('click', () => {
   hideBigPicture();
-
 });
 
 export {showBigPicture};
