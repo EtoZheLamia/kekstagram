@@ -8,11 +8,14 @@ const Filter = {
   DEFAULT: 'filter-default',
   RANDOM: 'filter-random',
   DISCUSSED: 'filter-discussed',
+  POPULAR: 'filter-popular',
 };
 
 const discussedSort = (pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length;
 
 const randomSort = () => Math.random() - 0.5;
+
+const popularSort = (pictureA, pictureB) => pictureB.likes - pictureA.likes;
 
 const turnFilterOn = (loadedPictures) => {
   IMAGES_FILTER.classList.remove('img-filters--inactive');
@@ -24,6 +27,8 @@ const filterPictures = () => {
   switch (currentFilter) {
     case Filter.DISCUSSED:
       return  [...pictures].sort(discussedSort);
+    case Filter.POPULAR:
+      return  [...pictures].sort(popularSort);
     case Filter.RANDOM:
       return  [...pictures].sort(randomSort).slice(0, 10);
     case Filter.DEFAULT:
