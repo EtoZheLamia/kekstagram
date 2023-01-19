@@ -1,6 +1,3 @@
-import {sendData} from './api.js';
-import {hideModal} from './user-modal.js';
-
 const FORM = document.querySelector('.img-upload__form');
 const TEXT_HASHTAGS = FORM.querySelector('.text__hashtags');
 
@@ -10,27 +7,41 @@ const pristine = new Pristine(FORM, {
   errorTextClass: 'img-upload__text__error-text',
 });
 
-const setUserFormSubmit = () => {
+const setUserFormSubmit = (cb) => {
   FORM.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid){
       blockSubmitButton();
-      sendData(
-        () => {
-          showSuccessAlert();
-          unblockSubmitButton();
-        },
-        () => {
-          showFailAlert();
-          unblockSubmitButton();
-        },
-        new FormData(evt.target)
-      );} else {
+      cb(new FormData(FORM));
+      unblockSubmitButton();}
+    else {
       incorrectField();
     }
   }
   );};
+
+// const setUserFormSubmit = () => {
+//   FORM.addEventListener('submit', (evt) => {
+//     evt.preventDefault();
+//     const isValid = pristine.validate();
+//     if (isValid){
+//       blockSubmitButton();
+//       sendData(
+//         () => {
+//           showSuccessAlert();
+//           unblockSubmitButton();
+//         },
+//         () => {
+//           showFailAlert();
+//           unblockSubmitButton();
+//         },
+//         new FormData(evt.target)
+//       );} else {
+//       incorrectField();
+//     }
+//   }
+//   );};
 
 const MAX_HASHTAG_COUNT = 5;
 const re = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
@@ -57,43 +68,6 @@ pristine.addValidator(
   validateTags,
   'Неправильно заполнены хэштеги'
 );
-
-function showSuccessAlert() {
-  hideModal();
-  const SUCCESS_TEMPLATE = document.querySelector('#success')
-    .content
-    .querySelector('.success');
-  const succes = SUCCESS_TEMPLATE.cloneNode(true);
-  document.body.append(succes);
-  const SUCCES_BUTTON =  document.querySelector('.success__button');
-  SUCCES_BUTTON.addEventListener('click', () => {
-    succes.remove();
-  });
-  succes.addEventListener('click', (evt) => {
-    if (evt.target.matches('.success')) {
-      succes.remove();
-    }
-  });
-}
-
-
-function showFailAlert() {
-  hideModal();
-  const FAIL_TEMPLATE = document.querySelector('#error')
-    .content
-    .querySelector('.error');
-  const error = FAIL_TEMPLATE.cloneNode(true);
-  document.body.append(error);
-  const ERROR_BUTTON =  document.querySelector('.error__button');
-  ERROR_BUTTON.addEventListener('click', () => {
-    error.remove();
-  });
-  error.addEventListener('click', (evt) => {
-    if (!evt.target.matches('.error__inner')) {
-      error.remove();
-    }
-  });
-}
 
 function incorrectField() {
   const incorrectTemplate = `<div class="incorrect-field">

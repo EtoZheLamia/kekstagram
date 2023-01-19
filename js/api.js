@@ -1,14 +1,11 @@
-import {showAlertLoad} from './util.js';
-import {renderPictures} from './preview-pictures.js';
-
-const getData = () => {
+const getData = (onSuccess, onFail) => {
   fetch ('https://25.javascript.pages.academy/kekstagram/data')
     .then((response)=>response.json())
     .then((photos)=> {
-      renderPictures(photos);
+      onSuccess(photos);
     })
     .catch(() =>{
-      showAlertLoad();
+      onFail();
     });
 };
 

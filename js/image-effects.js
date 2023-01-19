@@ -144,4 +144,9 @@ function onSliderUpdate() {
 EFFECTS_LIST.addEventListener('change', onChangeEffects);
 EFFECT_LEVEL_SLIDER.noUiSlider.on('update', onSliderUpdate);
 
-export {onSmallerButtonClick, onBiggerButtonClick, onChangeEffects};
+const resetEffects = () => {
+  currentEffect = DEFAULT_EFFECT;
+  updateSlider();
+};
+
+export {onSmallerButtonClick, onBiggerButtonClick, onChangeEffects, resetEffects};
