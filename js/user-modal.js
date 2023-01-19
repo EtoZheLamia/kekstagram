@@ -1,6 +1,8 @@
 import {isEscapeKey} from './util.js';
 import {onSmallerButtonClick, onBiggerButtonClick, onChangeEffects} from './image-effects.js';
 
+import {resetEffects} from './image-effects.js';
+
 const FORM = document.querySelector('.img-upload__form');
 const FILE_FIELD = FORM.querySelector('#upload-file');
 const UPLOAD_CANCEL = FORM.querySelector('#upload-cancel');
@@ -11,6 +13,7 @@ const EFFECTS_LIST = document.querySelector('.effects__list');
 const IMAGE_LEVEL_EFFECT = document.querySelector('.img-upload__effect-level');
 const TEXT_HASHTAGS = FORM.querySelector('.text__hashtags');
 const IMAGE_PREVIEW = FORM.querySelector('.img-upload__preview img');
+const EFFECT_PREVIEW_IMG = document.querySelectorAll('.effects__preview-img');
 
 
 const onPopupEscKeydown = (evt) => {
@@ -45,6 +48,7 @@ FILE_FIELD.addEventListener('change', () => {
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
   if (matches) {
     IMAGE_PREVIEW.src = URL.createObjectURL(file);
+    EFFECT_PREVIEW_IMG.forEach((element) => {element.src = IMAGE_PREVIEW.src;});
   }
 });
 
@@ -58,6 +62,7 @@ function hideModal() {
   BIGGER_SCALE_CONTROL.removeEventListener('click', onBiggerButtonClick);
   EFFECTS_LIST.removeEventListener('change', onChangeEffects);
   FORM.reset();
+  resetEffects();
 }
 
 UPLOAD_CANCEL.addEventListener('click', () => {
