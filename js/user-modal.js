@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {onSmallerButtonClick, onBiggerButtonClick, onChangeEffects} from './filters.js';
+import {onSmallerButtonClick, onBiggerButtonClick, onChangeEffects} from './image-effects.js';
 
 const FORM = document.querySelector('.img-upload__form');
 const FILE_FIELD = FORM.querySelector('#upload-file');
