@@ -1,5 +1,3 @@
-import noUiSlider from 'nouislider';
-
 const IMAGE_PREVIEW = document.querySelector('.img-upload__preview img ');
 const VALUE_SCALE_CONTROL = document.querySelector('.scale__control--value');
 const SCALE_STEP = 25;
