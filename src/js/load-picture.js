@@ -1,3 +1,5 @@
+import Pristine from 'pristinejs';
+
 const FORM = document.querySelector('.img-upload__form');
 const TEXT_HASHTAGS = FORM.querySelector('.text__hashtags');
 
@@ -6,6 +8,17 @@ const pristine = new Pristine(FORM, {
   errorTextParent: 'img-upload__text',
   errorTextClass: 'img-upload__text__error-text',
 });
+
+const BUTTON_SUBMIT = FORM.querySelector('.img-upload__submit');
+const blockSubmitButton = () => {
+  BUTTON_SUBMIT.disabled = true;
+  BUTTON_SUBMIT.textContent = 'Отправляю...';
+};
+
+const unblockSubmitButton = () => {
+  BUTTON_SUBMIT.disabled = false;
+  BUTTON_SUBMIT.textContent = 'Опубликовать';
+};
 
 const setUserFormSubmit = (cb) => {
   FORM.addEventListener('submit', (evt) => {
@@ -20,28 +33,6 @@ const setUserFormSubmit = (cb) => {
     }
   }
   );};
-
-// const setUserFormSubmit = () => {
-//   FORM.addEventListener('submit', (evt) => {
-//     evt.preventDefault();
-//     const isValid = pristine.validate();
-//     if (isValid){
-//       blockSubmitButton();
-//       sendData(
-//         () => {
-//           showSuccessAlert();
-//           unblockSubmitButton();
-//         },
-//         () => {
-//           showFailAlert();
-//           unblockSubmitButton();
-//         },
-//         new FormData(evt.target)
-//       );} else {
-//       incorrectField();
-//     }
-//   }
-//   );};
 
 const MAX_HASHTAG_COUNT = 5;
 const re = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
@@ -81,17 +72,6 @@ function incorrectField() {
   ERROR_BUTTON.addEventListener('click', () => {
     FORM.querySelector('.incorrect-field').remove();
   });
-}
-
-const BUTTON_SUBMIT = FORM.querySelector('.img-upload__submit');
-function blockSubmitButton() {
-  BUTTON_SUBMIT.disabled = true;
-  BUTTON_SUBMIT.textContent = 'Публикую...';
-}
-
-function unblockSubmitButton() {
-  BUTTON_SUBMIT.disabled = false;
-  BUTTON_SUBMIT.textContent = 'Опубликовать';
 }
 
 export {setUserFormSubmit};

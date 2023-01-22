@@ -1,3 +1,9 @@
+import '../css/style.css';
+import '../css/normalize.css';
+import 'nouislider/dist/nouislider.css';
+import '../index.html';
+import './assets.js';
+
 import {setUserFormSubmit} from './load-picture.js';
 import {getData, sendData} from './api.js';
 import {showAlertLoad} from './util.js';
@@ -11,7 +17,8 @@ const onGetDataSuccess = (data) => {
   setOnFilterClick(renderPictures);
 };
 
-setUserFormSubmit((data) => {
-  sendData(showSuccessAlert, showFailAlert, data);
+setUserFormSubmit(async (data) => {
+  await sendData(showSuccessAlert, showFailAlert, data);
 });
+
 getData(onGetDataSuccess, showAlertLoad);
