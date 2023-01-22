@@ -1,4 +1,4 @@
-# Личный проект «Кекстаграм» - https://js1-kekstagram.netlify.app/
+# Личный проект «Кекстаграм» - https://comfy-toffee-524cca.netlify.app/
 
 ---
 
